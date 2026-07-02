@@ -6,25 +6,27 @@ import Home from "./pages/Home";
 
 import TaskModal from "./components/TaskModal";
 
+const today = new Date().toISOString().split("T")[0];
+
 const defaultTasks = [
   {
     id: 1,
     title: "React Project",
-    date: "2026-07-02",
+    date: today,
     time: "09:00",
     completed: false,
   },
   {
     id: 2,
     title: "Lunch",
-    date: "2026-07-02",
+    date: today,
     time: "12:30",
     completed: true,
   },
   {
     id: 3,
     title: "Gym",
-    date: "2026-07-02",
+    date: today,
     time: "17:00",
     completed: false,
   },
@@ -63,13 +65,18 @@ function App() {
       localStorage.setItem("tasks", JSON.stringify(tasks));
     }, [tasks]);
 
+  const [editingTask, setEditingTask] = useState(null);
+
   return (
     <div className="app">
 
         <Home
             tasks={tasks}
-            openModal={() => setIsModalOpen(true)}
             toggleTask={toggleTask}
+            openEditTask={(task) => {
+                setEditingTask(task);
+                setIsModalOpen(true);
+            }}
         />
 
         {isModalOpen && (

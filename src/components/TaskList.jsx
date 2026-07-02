@@ -1,6 +1,10 @@
 import TaskItem from "./TaskItem";
 
-function TaskList({ tasks, toggleTask }) {
+function TaskList({
+    tasks,
+    toggleTask,
+    openEditTask
+}) {
 
   const today = new Date().toISOString().split("T")[0];
 
@@ -13,9 +17,15 @@ function TaskList({ tasks, toggleTask }) {
 
       <h2>Today's Focus</h2>
 
+     <h2 className="task-count">
+        {todaysTasks.length}{" "}
+        {todaysTasks.length === 1 ? "Task" : "Tasks"} Today
+      </h2>
+
       {todaysTasks.length === 0 && (
         <div className="empty-state">
-          🌿
+          
+          <div className="leaf">🌿</div>
 
           <h3>Nothing planned today</h3>
 
@@ -28,13 +38,10 @@ function TaskList({ tasks, toggleTask }) {
       {todaysTasks.length > 0 && todaysTasks.map((task) => (
 
         <TaskItem
-
             key={task.id}
-
             task={task}
-
             toggleTask={toggleTask}
-
+            openEditTask={openEditTask}
         />
 
       ))}

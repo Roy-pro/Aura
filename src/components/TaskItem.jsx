@@ -4,11 +4,15 @@ import {
   Clock3,
 } from "lucide-react";
 
-function TaskItem({ task, toggleTask }) {
+function TaskItem({
+    task,
+    toggleTask,
+    openEditTask
+}) {
 
   return (
 
-    <div className={`task-card ${task.completed ? "completed" : ""}`}>
+    <div className={`task-card ${task.completed ? "completed" : ""}`} onClick={() => openEditTask(task)}>
 
       <div className="task-info">
 
@@ -24,17 +28,22 @@ function TaskItem({ task, toggleTask }) {
 
       </div>
 
-      <div
-        className="task-status"
-        onClick={() => toggleTask(task.id)}
-      >
+      <div className="task-status">
 
-        {task.completed
-          ? <CircleCheckBig size={28}/>
-          : <Circle size={28}/>
-        }
+  <button
+    className="status-button"
+    onClick={(e) => {
+      e.stopPropagation();
+      toggleTask(task.id);
+    }}
+  >
+    {task.completed
+      ? <CircleCheckBig size={28}/>
+      : <Circle size={28}/>
+    }
+  </button>
 
-      </div>
+</div>
 
     </div>
 

@@ -158,13 +158,35 @@ box-shadow: 0 12px 30px rgba(0,0,0,.25);
 
 .task-card.completed{
 
-opacity:.65;
+opacity:.55;
+
+filter:saturate(.6);
 
 }
 
 .task-card.completed h3{
 
 text-decoration:line-through;
+
+text-decoration-thickness:2px;
+
+}
+
+.status-button{
+
+    background:none;
+    border:none;
+
+    padding:0;
+    margin:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    color:inherit;
 
 }
 
@@ -393,26 +415,32 @@ margin-bottom:24px;
 
 .empty-state{
 
-margin-top:60px;
+margin-top:70px;
 
 text-align:center;
 
-opacity:.75;
+opacity:.8;
 
 }
 
 .empty-state h3{
 
-margin-top:16px;
+margin-top:20px;
 
-font-size:1.3rem;
+font-size:1.4rem;
 
 }
 
 .empty-state p{
 
-margin-top:8px;
+margin-top:10px;
 
-opacity:.6;
+opacity:.65;
+
+}
+
+.leaf{
+
+font-size:3rem;
 
 }
