@@ -172,22 +172,24 @@ text-decoration-thickness:2px;
 
 }
 
-.status-button{
+.status-button {
+  background: transparent;
+  border: none;
+  outline: none;
 
-    background:none;
-    border:none;
+  padding: 0;
 
-    padding:0;
-    margin:0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  cursor: pointer;
 
-    cursor:pointer;
+  color: inherit;
+}
 
-    color:inherit;
-
+.status-button:hover {
+  transform: scale(1.08);
 }
 
 /* ---------- ADD TASK ---------- */

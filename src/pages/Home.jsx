@@ -3,21 +3,22 @@ import TaskList from "../components/TaskList";
 import AddTask from "../components/AddTask";
 
 function Home({
-    tasks,
-    toggleTask,
-    openEditTask
+  tasks,
+  toggleTask,
+  openModal,
+  openEditTask,
 }) {
   return (
     <div className="planner">
       <Header />
 
       <TaskList
-          tasks={tasks}
-          toggleTask={toggleTask}
-          openEditTask={openEditTask}
+        tasks={tasks}
+        toggleTask={toggleTask}
+        openEditTask={openEditTask}
       />
 
-      <AddTask openModal={openEditTask} />
+      <AddTask openModal={openModal} />
     </div>
   );
 }

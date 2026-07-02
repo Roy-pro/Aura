@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
-
 import "./App.css";
 
 import Home from "./pages/Home";
-
 import TaskModal from "./components/TaskModal";
 
 const today = new Date().toISOString().split("T")[0];
@@ -34,21 +32,25 @@ const defaultTasks = [
 
 function App() {
   const [tasks, setTasks] = useState(() => {
-  const saved = localStorage.getItem("tasks");
+    const saved = localStorage.getItem("tasks");
+    return saved ? JSON.parse(saved) : defaultTasks;
+  });
 
-  return saved ? JSON.parse(saved) : defaultTasks;
-});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [editingTask, setEditingTask] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   const addTask = (newTask) => {
-    setTasks(previousTasks => [
-      ...previousTasks,
-      newTask,
-    ]);
+    setTasks((previousTasks) => [...previousTasks, newTask]);
   };
 
   const toggleTask = (id) => {
-    setTasks(previousTasks =>
-      previousTasks.map(task =>
+    setTasks((previousTasks) =>
+      previousTasks.map((task) =>
         task.id === id
           ? {
               ...task,
@@ -59,33 +61,38 @@ function App() {
     );
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openCreateModal = () => {
+    setEditingTask(null);
+    setIsModalOpen(true);
+  };
 
-  useEffect(() => {
-      localStorage.setItem("tasks", JSON.stringify(tasks));
-    }, [tasks]);
+  const openEditTask = (task) => {
+    console.log("Editing:", task);
 
-  const [editingTask, setEditingTask] = useState(null);
+    setEditingTask(task);
+
+    setIsModalOpen(true);
+  };
 
   return (
     <div className="app">
+      <Home
+        tasks={tasks}
+        toggleTask={toggleTask}
+        openModal={openCreateModal}
+        openEditTask={openEditTask}
+      />
 
-        <Home
-            tasks={tasks}
-            toggleTask={toggleTask}
-            openEditTask={(task) => {
-                setEditingTask(task);
-                setIsModalOpen(true);
-            }}
+      {isModalOpen && (
+        <TaskModal
+          closeModal={() => {
+            setIsModalOpen(false);
+            setEditingTask(null);
+          }}
+          addTask={addTask}
+          editingTask={editingTask}
         />
-
-        {isModalOpen && (
-            <TaskModal
-                closeModal={() => setIsModalOpen(false)}
-                addTask={addTask}
-            />
-        )}
-
+      )}
     </div>
   );
 }
