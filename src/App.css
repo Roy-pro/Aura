@@ -1,0 +1,418 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Inter, sans-serif;
+}
+
+.app{
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items: flex-start;
+
+    padding:50px 20px;
+}
+
+.planner{
+
+    width:100%;
+
+    max-width:620px;
+
+    background:var(--glass);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid var(--glass-border);
+
+    border-radius:30px;
+
+    box-shadow: 0 8px 32px rgba(0,0,0,.3);
+
+    padding: 32px 32px 100px;
+
+    position: relative;
+
+}
+
+.header{
+
+text-align:center;
+
+margin-bottom:60px;
+
+}
+
+.header h1{
+
+font-size:3rem;
+
+font-weight:700;
+
+margin-bottom:12px;
+
+}
+
+.greeting{
+
+font-size:1rem;
+
+opacity:.8;
+
+}
+
+.time{
+
+font-size:2rem;
+
+font-weight:600;
+
+margin:16px 0 8px;
+
+}
+
+.date{
+
+opacity:.7;
+
+}
+
+/* ---------- TASK LIST ---------- */
+
+h2{
+    margin-bottom:20px;
+}
+
+.task-card{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px;
+
+    margin-bottom:16px;
+
+    border-radius:26px;
+
+    background:var(--glass);
+
+    border:1px solid var(--glass-border);
+
+    transition:
+                transform .25s ease,
+                background .25s ease,
+                box-shadow .25s ease;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,.15);
+}
+
+.task-card:hover{
+
+    transform:
+          translateY(-4px)
+          scale(1.01);
+
+box-shadow: 0 12px 30px rgba(0,0,0,.25);
+
+    background:rgba(255,255,255,.12);
+
+}
+
+.task-time{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    opacity:.8;
+
+    margin-bottom:8px;
+
+    font-size:.9rem;
+
+}
+
+.task-info h3{
+
+    font-weight:500;
+
+}
+
+.task-status{
+
+    cursor:pointer;
+
+}
+
+.task-card.completed{
+
+opacity:.65;
+
+}
+
+.task-card.completed h3{
+
+text-decoration:line-through;
+
+}
+
+/* ---------- ADD TASK ---------- */
+
+.add-button{
+
+position: absolute;
+
+bottom: 24px;
+right: 24px;
+
+width:64px;
+
+height:64px;
+
+border-radius:22px;
+
+border:none;
+
+background:var(--glass);
+
+backdrop-filter:blur(20px);
+
+color:white;
+
+font-size:2rem;
+
+cursor:pointer;
+
+box-shadow:
+0 12px 30px rgba(0,0,0,.25),
+inset 0 1px 0 rgba(255,255,255,.08);
+
+transition:.25s;
+
+z-index:999;
+
+}
+
+.add-button:hover{
+
+transform:
+translateY(-3px)
+scale(1.05);
+
+}
+
+/* ---------- MODAL ---------- */
+
+.modal-overlay{
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,.45);
+
+display:flex;
+
+justify-content:center;
+
+align-items:flex-end;
+
+z-index:1000;
+
+}
+
+.task-modal{
+
+width:min(650px,100%);
+
+min-height:420px;
+
+background:var(--glass);
+
+backdrop-filter:blur(25px);
+
+padding:26px 42px 42px;
+
+border-radius:32px 32px 0 0;
+
+animation:slideUp .3s ease;
+
+}
+
+.task-modal label{
+
+display:block;
+
+margin-top:20px;
+
+margin-bottom:8px;
+
+font-weight:500;
+
+}
+
+.task-modal input{
+
+width:100%;
+
+padding:14px 18px;
+
+border:none;
+
+outline:none;
+
+border-radius:16px;
+
+background:rgba(255,255,255,.08);
+
+color:white;
+
+font-size:1rem;
+
+margin-bottom:10px;
+
+}
+
+.task-modal input::placeholder{
+
+color:rgba(255,255,255,.45);
+
+}
+
+.modal-buttons{
+
+display:flex;
+
+justify-content:flex-end;
+
+gap:14px;
+
+margin-top:30px;
+
+}
+
+.modal-buttons button{
+
+padding:12px 22px;
+
+border:none;
+
+border-radius:14px;
+
+cursor:pointer;
+
+background:rgba(255,255,255,.08);
+
+color:white;
+
+font-size:.95rem;
+
+transition:.2s;
+
+}
+
+.modal-buttons button:hover{
+
+background:rgba(255,255,255,.14);
+
+}
+
+.task-modal h2{
+
+font-size:2.2rem;
+
+margin-bottom:32px;
+
+}
+
+.create-button{
+
+    background:#7FA887;
+
+    color:#102017;
+
+    font-weight:600;
+
+}
+
+.create-button:hover{
+
+    background:#96C39D;
+
+    transform:translateY(-2px);
+
+}
+
+@keyframes slideUp{
+
+from{
+
+transform:translateY(100%);
+
+}
+
+to{
+
+transform:translateY(0);
+
+}
+
+}
+
+/* ---------- DRAG HANDLE ---------- */
+
+.drag-handle{
+
+width:70px;
+
+height:6px;
+
+border-radius:999px;
+
+background:rgba(255,255,255,.18);
+
+margin:0 auto;
+
+margin-bottom:24px;
+
+}
+
+/* ---------- TASK LIST EMPTY STATE ---------- */
+
+.empty-state{
+
+margin-top:60px;
+
+text-align:center;
+
+opacity:.75;
+
+}
+
+.empty-state h3{
+
+margin-top:16px;
+
+font-size:1.3rem;
+
+}
+
+.empty-state p{
+
+margin-top:8px;
+
+opacity:.6;
+
+}
