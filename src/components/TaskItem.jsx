@@ -1,13 +1,15 @@
 import {
-  Circle,
-  CircleCheckBig,
-  Clock3,
+    Circle,
+    CircleCheckBig,
+    Clock3,
+    Trash2
 } from "lucide-react";
 
 function TaskItem({
   task,
   toggleTask,
   openEditTask,
+  deleteTask,
 }) {
   return (
     <div
@@ -25,20 +27,29 @@ function TaskItem({
         <h3>{task.title}</h3>
       </div>
 
-      <div className="task-status">
+      <div className="task-actions">
         <button
-          className="status-button"
-          onClick={(e) => {
-            e.stopPropagation();
-            toggleTask(task.id);
-          }}
-        >
-          {task.completed ? (
-            <CircleCheckBig size={28} />
-          ) : (
-            <Circle size={28} />
-          )}
-        </button>
+    className="icon-button"
+    onClick={(e) => {
+        e.stopPropagation();
+        deleteTask(task.id);
+    }}
+>
+    <Trash2 size={18}/>
+</button>
+
+<button
+    className="status-button"
+    onClick={(e) => {
+        e.stopPropagation();
+        toggleTask(task.id);
+    }}
+>
+    {task.completed
+        ? <CircleCheckBig size={28}/>
+        : <Circle size={28}/>
+    }
+</button>
       </div>
     </div>
   );

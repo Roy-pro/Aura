@@ -150,9 +150,37 @@ box-shadow: 0 12px 30px rgba(0,0,0,.25);
 
 }
 
-.task-status{
+.task-actions{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+    align-items:center;
+
+}
+
+.icon-button{
+
+    background:none;
+
+    border:none;
+
+    color:rgba(255,255,255,.65);
 
     cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.icon-button:hover{
+
+    color:#ff8c8c;
+
+    transform:scale(1.15);
 
 }
 

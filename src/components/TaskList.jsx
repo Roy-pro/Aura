@@ -3,7 +3,8 @@ import TaskItem from "./TaskItem";
 function TaskList({
     tasks,
     toggleTask,
-    openEditTask
+    openEditTask,
+    deleteTask,
 }) {
 
   const today = new Date().toISOString().split("T")[0];
@@ -42,6 +43,7 @@ function TaskList({
             task={task}
             toggleTask={toggleTask}
             openEditTask={openEditTask}
+            deleteTask={deleteTask}
         />
 
       ))}

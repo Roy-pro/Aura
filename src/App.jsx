@@ -61,6 +61,12 @@ function App() {
     );
   };
 
+  const deleteTask = (id) => {
+    setTasks((previousTasks) =>
+      previousTasks.filter((task) => task.id !== id)
+    );
+  };
+
   const openCreateModal = () => {
     setEditingTask(null);
     setIsModalOpen(true);
@@ -77,10 +83,11 @@ function App() {
   return (
     <div className="app">
       <Home
-        tasks={tasks}
-        toggleTask={toggleTask}
-        openModal={openCreateModal}
-        openEditTask={openEditTask}
+          tasks={tasks}
+          toggleTask={toggleTask}
+          deleteTask={deleteTask}
+          openModal={openCreateModal}
+          openEditTask={openEditTask}
       />
 
       {isModalOpen && (
