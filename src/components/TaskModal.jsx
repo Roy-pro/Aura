@@ -1,6 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function TaskModal({ closeModal, addTask }) {
+function TaskModal({
+  closeModal,
+  addTask,
+  updateTask,
+  editingTask,
+}) {
 
     const [title, setTitle] = useState("");
 
@@ -8,25 +13,49 @@ function TaskModal({ closeModal, addTask }) {
 
     const [time, setTime] = useState("");
 
-    const handleCreateTask = () => {
+    useEffect(() => {
+        if (editingTask) {
+            setTitle(editingTask.title);
+            setDate(editingTask.date);
+            setTime(editingTask.time);
+        } else {
+            setTitle("");
+            setDate("");
+            setTime("");
+        }
+        }, [editingTask]);
+
+    const handleSubmit = () => {
 
         if (!title.trim()) return;
 
-        const newTask = {
+        if (editingTask) {
 
-            id: Date.now(),
+            updateTask({
 
-            title,
+                ...editingTask,
 
-            date,
+                title,
+                date,
+                time,
 
-            time,
+            });
 
-            completed: false,
+        } else {
 
-        };
+            addTask({
 
-        addTask(newTask);
+                id: Date.now(),
+
+                title,
+                date,
+                time,
+
+                completed:false,
+
+            });
+
+        }
 
         setTitle("");
         setDate("");
@@ -44,7 +73,9 @@ function TaskModal({ closeModal, addTask }) {
 
     <div className="drag-handle"></div>
 
-    <h2>New Task</h2>
+    <h2>
+        {editingTask ? "Edit Task" : "New Task"}
+    </h2>
 
     <label>Task</label>
 
@@ -87,8 +118,8 @@ function TaskModal({ closeModal, addTask }) {
             Cancel
         </button>
 
-        <button className="create-button" onClick={handleCreateTask}>
-            Create Task
+        <button className="create-button" onClick={handleSubmit}>
+            {editingTask ? "Save Changes" : "Create Task"}
         </button>
 
     </div>

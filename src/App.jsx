@@ -67,6 +67,14 @@ function App() {
     );
   };
 
+  const updateTask = (updatedTask) => {
+    setTasks((previousTasks) =>
+      previousTasks.map((task) =>
+        task.id === updatedTask.id ? updatedTask : task
+      )
+    );
+  };
+
   const openCreateModal = () => {
     setEditingTask(null);
     setIsModalOpen(true);
@@ -97,6 +105,7 @@ function App() {
             setEditingTask(null);
           }}
           addTask={addTask}
+          updateTask={updateTask}
           editingTask={editingTask}
         />
       )}
